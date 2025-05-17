@@ -1,20 +1,22 @@
 import React, { FC } from 'react';
 import { useRouter } from 'next/navigation';
+import AuthenticationService from "@/app/service/AuthenticationService";
 
 interface AdminNavProps {
-  
+
 }
 
 const AdminNav: FC<AdminNavProps> = ({ }) => {
     const router = useRouter();
-    const handleLogout = () => {
-      console.log('logout');
+    const handleLogout = async () => {
+        await AuthenticationService.logout();
+        router.replace('/admin');
     };
-  
+
     const handleInformes = () => {
       router.push('/admin/dashboard/informes');
     };
-  
+
     const handleUsuarios = () => {
       router.push('/admin/dashboard/usuarios');
     };

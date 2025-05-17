@@ -1,0 +1,6 @@
+export const COGNITO = {
+    "REGION": process.env.NEXT_PUBLIC_COGNITO_REGION,
+    "DOMAIN": process.env.NEXT_PUBLIC_COGNITO_DOMAIN,
+    "USER_POOL_ID": process.env.NEXT_PUBLIC_USER_POOL_ID,
+    "CLIENT_ID": process.env.NEXT_PUBLIC_USER_POOL_CLIENT_ID
+}

@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useRouter } from "next/navigation";
+import AuthenticationService from "@/app/service/AuthenticationService";
 
 interface RegistroNavProps {
   
@@ -8,8 +9,9 @@ interface RegistroNavProps {
 const RegistroNav: FC<RegistroNavProps> = ({ }) => {
     const router = useRouter()
 
-      const handleLogout = () => {
-        console.log('logout')
+      const handleLogout = async () => {
+        await AuthenticationService.logout();
+        router.replace('/')
       }
       const handleHistory = () => {
         router.push('/registro/historial')

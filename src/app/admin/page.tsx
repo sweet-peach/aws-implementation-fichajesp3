@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import AuthenticationService from "@/app/service/AuthenticationService";
 
 export default function Admin() {
   const router = useRouter();
@@ -13,10 +14,18 @@ export default function Admin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí iría la lógica de autenticación
-    console.log('Email:', email, 'Password:', password);
+    try {
+        const payload : any = await AuthenticationService.login(email, password);
+        const roles : any = payload['cognito:groups'] || [];
+        const isAdmin = roles.includes('admin');
+
+        if(isAdmin) return router.replace('/admin/dashboard');
+        return router.replace('/registro')
+    } catch(e){
+        // TODO implement
+    }
   };
 
   return (
